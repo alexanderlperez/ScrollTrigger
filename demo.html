@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>ScrollTrigger Demo</title>
+    </head>
+    <body style="min-height: 1000px;">
+
+        <div id="one" style="position: absolute; top: 100px; width: 100%;">
+            Trigger at 100px
+            <hr>
+        </div>
+        <div id="two" style="position: absolute; top: 300px; width: 100%;">
+            Trigger at 300px
+            <hr>
+        </div>
+        <div id="three" style="position: absolute; top: 500px; width: 100%;">
+            Trigger at 500px
+            <hr>
+        </div>
+        
+        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src="scrolltrigger.js"></script>
+        <script>
+            $(document).ready(function () {
+
+                new ScrollTrigger({
+                    triggerPosition: 100, // this can be set with $(element).offset() too
+                    triggerDownCallback: function () {
+                        console.log('Going down at 100!');
+                    }, 
+                    triggerUpCallback: function () {
+                        console.log('Going up at 100!');
+                    }
+                });
+
+                new ScrollTrigger({
+                    triggerPosition: 300, // this can be set with $(element).offset() too
+                    triggerDownCallback: function () {
+                        console.log('Going down at 300!');
+                    }, 
+                    triggerUpCallback: function () {
+                        console.log('Going up at 300!');
+                    }
+                });
+
+                new ScrollTrigger({
+                    triggerPosition: 500, // this can be set with $(element).offset() too
+                    triggerDownCallback: function () {
+                        console.log('Going down at 500!');
+                    }, 
+                    triggerUpCallback: function () {
+                        console.log('Going up at 500!');
+                    }
+                });
+            })
+        </script>
+    </body>
+</html>

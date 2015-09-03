@@ -2,7 +2,7 @@
 
 // Runs trigger code once per direction 
 // Handles effects depending what direction
-var Scroll_Trigger = function (options) {
+var ScrollTrigger = function (options) {
     var $window = $(window);
 
     var triggerDownCallback = options ? options.triggerDownCallback : function () {};
