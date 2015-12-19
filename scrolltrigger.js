@@ -1,51 +1,54 @@
+'require strict';
 // Depends on jQuery
 
 // Runs trigger code once per direction 
 // Handles effects depending what direction
-var ScrollTrigger = function (options) {
-    var $window = $(window);
+;var ScrollTrigger = (function (window, $) {
+    return function (options) {
+        var $window = $(window);
 
-    var triggerDownCallback = options ? options.triggerDownCallback : function () {};
-    var triggerUpCallback = options ? options.triggerUpCallback : function () {};
-    var triggerPos = options ? options.triggerPosition : 0;
+        var triggerDownCallback = options ? options.triggerDownCallback : function () {};
+        var triggerUpCallback = options ? options.triggerUpCallback : function () {};
+        var triggerPos = options ? options.triggerPosition : 0;
 
-    var lastTriggerDirection = 'up'; 
-    var lastPos = $window.scrollTop();
+        var lastTriggerDirection = 'up'; 
+        var lastPos = $window.scrollTop();
 
-    function getDir() {
-        return $window.scrollTop() >= lastPos ? 'down' : 'up';
-    }
-
-    function isTriggered() {
-        if (getDir() === 'down') {
-            return $window.scrollTop() > triggerPos;
-        } else if (getDir() === 'up') {
-            return $window.scrollTop() < triggerPos;
+        function getDir() {
+            return $window.scrollTop() >= lastPos ? 'down' : 'up';
         }
-    }
 
-    $window.scroll(function () {
-        if (isTriggered()) {
-            // only run the code once per trigger direction
+        function isTriggered() {
+            if (getDir() === 'down') {
+                return $window.scrollTop() > triggerPos;
+            } else if (getDir() === 'up') {
+                return $window.scrollTop() < triggerPos;
+            }
+        }
 
-            switch (getDir()) {
-                case 'down': 
-                    if (lastTriggerDirection === 'up') {
+        $window.scroll(function () {
+            if (isTriggered()) {
+                // only run the code once per trigger direction
+
+                switch (getDir()) {
+                    case 'down': 
+                        if (lastTriggerDirection === 'up') {
                         triggerDownCallback();
                         lastTriggerDirection = 'down';
                     }
                     break;
 
-                case 'up':
-                    if (lastTriggerDirection === 'down') {
+                    case 'up':
+                        if (lastTriggerDirection === 'down') {
                         triggerUpCallback();
                         lastTriggerDirection = 'up';
                     }
                     break;
+                }
+
             }
 
-        }
-
-        lastPos = $window.scrollTop();
-    });
-}
+            lastPos = $window.scrollTop();
+        });
+    }; 
+})(window, jQuery);
