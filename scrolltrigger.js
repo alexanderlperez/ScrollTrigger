@@ -1,9 +1,10 @@
-'require strict';
 // Depends on jQuery
 
 // Runs trigger code once per direction 
 // Handles effects depending what direction
 ;var ScrollTrigger = (function (window, $) {
+    'require strict';
+
     return function (options) {
         var $window = $(window);
 
